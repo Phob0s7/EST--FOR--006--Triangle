@@ -107,17 +107,15 @@ namespace EST___FOR___006_Triangle
             //Cas 4 : s'il y a 2 côtés et 1 angles
             if (nombreCôté == 2 && nombreAngles == 1)
             {
-                double angleBêta = valeurSaisies[1] / (valeurSaisies[0] / (Math.Sin(valeurSaisies[2]) * Math.PI / 180));
+                double angleBêta = (Math.Asin(valeurSaisies[1] * Math.Sin(valeurSaisies[2] * Math.PI / 180) / valeurSaisies[0])) * 180 / Math.PI;
                 Console.WriteLine("Angle bêta = " + angleBêta);
 
+				double angleGamma = 180 - valeurSaisies[2] - angleBêta;
+				Console.WriteLine("Angle gamma = " + angleGamma);
+
+				double côtéC = valeurSaisies[1] * Math.Sin(angleGamma * Math.PI / 180) / Math.Sin(angleBêta * Math.PI / 180);
+				Console.WriteLine("Côté C = " + côtéC);
             }
-
-
-
         }
-
-        
-
-
     }
 }
