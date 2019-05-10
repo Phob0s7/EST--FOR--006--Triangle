@@ -1,6 +1,7 @@
-﻿/* Ce programme permet de déterminer des côtés et des angles d'un triangle à l'aide de trois valeurs.
+﻿/* Ecole Supérieure de Porrentruy (EST)
  * Date : 29.04.2019
  * Auteur : Sylvain Villoz TINF1
+ * Descriptif : Ce programme permet de déterminer des côtés et des angles d'un triangle à l'aide de trois valeurs.
  */
 using System;
 using System.Collections.Generic;
@@ -12,30 +13,28 @@ namespace EST___FOR___006_Triangle
 {
     class Program
     {
-		static int nbreCôté = 0;
-		static int nbreAngles = 0;
-		static readonly double[] valeurSaisies = new double[3];
-		static bool refaireCalculs = false;
+        static int nbreCôté = 0;
+        static int nbreAngles = 0;
+        static readonly double[] valeurSaisies = new double[3];
 
-
-		/// <summary>
-		/// Point d'entrée du programme
-		/// </summary>
-		/// <param name="args"></param>
-		static void Main(string[] args)
+        /// <summary>
+        /// Point d'entrée du programme
+        /// </summary>
+        /// <param name="args"></param>
+        static void Main(string[] args)
         {
-            Affichage();
-            Calculer();
+            do
+            {
+                Affichage();
+                Calculer();
+            } while (DoItAgain());
         }
 
-		/// <summary>
-		/// Permet d'afficher le menu d'accueil
-		/// </summary>
+        /// <summary>
+        /// Permet d'afficher le menu d'accueil
+        /// </summary>
         static public void Affichage()
         {
-			do
-			{
-
             Console.WriteLine("Ce programme permet de déterminer des côtés et des angles d'un triangle à l'aide de trois valeurs.");
             Console.WriteLine("--------------------------------------------------------------------------------------------------");
 
@@ -45,11 +44,11 @@ namespace EST___FOR___006_Triangle
             //Saisi des valeurs
             do
             {
-            Console.WriteLine("Veuillez saisir un côté ou un angle");
-            Console.WriteLine("\n1: Côté");
-            Console.WriteLine("2: Angle\n");
+                Console.WriteLine("Veuillez saisir un côté ou un angle");
+                Console.WriteLine("\n1: Côté");
+                Console.WriteLine("2: Angle\n");
 
-            int choixValeur = int.Parse(Console.ReadLine());
+                int choixValeur = int.Parse(Console.ReadLine());
 
                 switch (choixValeur)
                 {
@@ -73,15 +72,17 @@ namespace EST___FOR___006_Triangle
                         Console.WriteLine("\nLa valeur saisie est incorrecte, veuillez réessayer.\n");
                         break;
                 }
-            } while (nbreSaisi < 3);
-			} while (refaireCalculs);
-		}
 
-		/// <summary>
-		/// Cette méthode permet calculer les angles et les côtés
-		/// </summary>
-		static public void Calculer()
+            } while (nbreSaisi < 3);
+        }
+
+        /// <summary>
+        /// Cette méthode permet calculer les angles et les côtés
+        /// </summary>
+        static public void Calculer()
         {
+            string nouvelleSaisi = "";
+
             //Cas 1 : S'il  y a 3 angles connus
             if (nbreAngles == 3)
             {
@@ -91,14 +92,14 @@ namespace EST___FOR___006_Triangle
             //Cas 2 : S'il y a 3 côtés connus
             if (nbreCôté == 3)
             {
-                double angleAlpha = Math.Acos((Math.Pow(valeurSaisies[1],2) + Math.Pow(valeurSaisies[2],2) - Math.Pow(valeurSaisies[0],2)) / (2 * valeurSaisies[1] * valeurSaisies[2])) * 180 / Math.PI;
-                Console.WriteLine("Angle alpha = " + Math.Round(angleAlpha,1) + "°");
+                double angleAlpha = Math.Acos((Math.Pow(valeurSaisies[1], 2) + Math.Pow(valeurSaisies[2], 2) - Math.Pow(valeurSaisies[0], 2)) / (2 * valeurSaisies[1] * valeurSaisies[2])) * 180 / Math.PI;
+                Console.WriteLine("Angle alpha = " + Math.Round(angleAlpha, 1) + "°");
 
                 double angleBeta = (Math.Acos((Math.Pow(valeurSaisies[0], 2) + Math.Pow(valeurSaisies[2], 2) - Math.Pow(valeurSaisies[1], 2)) / (2 * valeurSaisies[0] * valeurSaisies[2])) * 180 / Math.PI);
-                Console.WriteLine("Angle bêta = " + Math.Round(angleBeta,1) + "°");
+                Console.WriteLine("Angle bêta = " + Math.Round(angleBeta, 1) + "°");
 
                 double angleGamma = 180 - angleAlpha - angleBeta;
-                Console.WriteLine("Angle gamma = " + Math.Round(angleGamma,1) + "°");
+                Console.WriteLine("Angle gamma = " + Math.Round(angleGamma, 1) + "°");
             }
 
             //Cas 3 : s'il  y a 1 côté et 2 angles
@@ -120,23 +121,39 @@ namespace EST___FOR___006_Triangle
                 double angleBêta = (Math.Asin(valeurSaisies[1] * Math.Sin(valeurSaisies[2] * Math.PI / 180) / valeurSaisies[0])) * 180 / Math.PI;
                 Console.WriteLine("Angle bêta = " + Math.Round(angleBêta, 1) + "°");
 
-				double angleGamma = 180 - valeurSaisies[2] - angleBêta;
-				Console.WriteLine("Angle gamma = " + Math.Round(angleGamma, 1) + "°");
+                double angleGamma = 180 - valeurSaisies[2] - angleBêta;
+                Console.WriteLine("Angle gamma = " + Math.Round(angleGamma, 1) + "°");
 
-				double côtéC = valeurSaisies[1] * Math.Sin(angleGamma * Math.PI / 180) / Math.Sin(angleBêta * Math.PI / 180);
-				Console.WriteLine("Côté C = " + Math.Round(côtéC, 1));
+                double côtéC = valeurSaisies[1] * Math.Sin(angleGamma * Math.PI / 180) / Math.Sin(angleBêta * Math.PI / 180);
+                Console.WriteLine("Côté C = " + Math.Round(côtéC, 1));
             }
-			Console.Write("\n");
+            Console.Write("\n");
 
-			Console.WriteLine("Voulez-vous saisir à nouveau 3 valeurs ? ");
-			Console.WriteLine("Oui = o\t Non = n");
+            Console.Write("Voulez-vous saisir à nouveau 3 valeurs ? (o/n)");
 
-			string nouvelleSaisi = Console.ReadLine();
+            nouvelleSaisi = Console.ReadLine();
 
-			if (nouvelleSaisi == "o")
-			{
-				Affichage();
-			}
+            if (nouvelleSaisi == "o" || nouvelleSaisi == "O")
+            {
+                Affichage();
+                Calculer();
+            }
+        }
+
+        static public bool DoItAgain()
+        {
+            Console.Write("\n");
+
+            Console.Write("Voulez-vous saisir à nouveau 3 valeurs ? (o/n)");
+
+            string nouvelleSaisi = Console.ReadLine();
+
+            if (nouvelleSaisi == "o" || nouvelleSaisi == "O")
+                return true;
+            else
+                return false;
         }
     }
 }
+
+
