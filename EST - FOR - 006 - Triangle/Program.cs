@@ -27,7 +27,7 @@ namespace EST___FOR___006_Triangle
             {
                 Affichage();
                 Calculer();
-            } while (DoItAgain());
+            } while (Nouvellesaisie());
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace EST___FOR___006_Triangle
             }
 
             //Cas 2 : S'il y a 3 côtés connus
-            if (nbreCôté == 3)
+            else if (nbreCôté == 3)
             {
                 double angleAlpha = Math.Acos((Math.Pow(valeurSaisies[1], 2) + Math.Pow(valeurSaisies[2], 2) - Math.Pow(valeurSaisies[0], 2)) / (2 * valeurSaisies[1] * valeurSaisies[2])) * 180 / Math.PI;
                 Console.WriteLine("Angle alpha = " + Math.Round(angleAlpha, 1) + "°");
@@ -103,7 +103,7 @@ namespace EST___FOR___006_Triangle
             }
 
             //Cas 3 : s'il  y a 1 côté et 2 angles
-            if (nbreCôté == 1 && nbreAngles == 2)
+            else if (nbreCôté == 1 && nbreAngles == 2)
             {
                 double côtéB = valeurSaisies[0] * Math.Sin(valeurSaisies[2] * Math.PI / 180) / Math.Sin(valeurSaisies[1] * Math.PI / 180);
                 Console.WriteLine("Côté B = " + Math.Round(côtéB, 1));
@@ -116,7 +116,7 @@ namespace EST___FOR___006_Triangle
             }
 
             //Cas 4 : s'il y a 2 côtés et 1 angles
-            if (nbreCôté == 2 && nbreAngles == 1)
+           else if (nbreCôté == 2 && nbreAngles == 1)
             {
                 double angleBêta = (Math.Asin(valeurSaisies[1] * Math.Sin(valeurSaisies[2] * Math.PI / 180) / valeurSaisies[0])) * 180 / Math.PI;
                 Console.WriteLine("Angle bêta = " + Math.Round(angleBêta, 1) + "°");
@@ -129,7 +129,7 @@ namespace EST___FOR___006_Triangle
             }
             Console.Write("\n");
 
-            Console.Write("Voulez-vous saisir à nouveau 3 valeurs ? (o/n)");
+            Console.Write("Voulez-vous saisir à nouveau 3 valeurs ? (o/n) ");
 
             nouvelleSaisi = Console.ReadLine();
 
@@ -138,9 +138,11 @@ namespace EST___FOR___006_Triangle
                 Affichage();
                 Calculer();
             }
+
+            Console.WriteLine("\n");
         }
 
-        static public bool DoItAgain()
+        static public bool Nouvellesaisie()
         {
             Console.Write("\n");
 
@@ -149,9 +151,15 @@ namespace EST___FOR___006_Triangle
             string nouvelleSaisi = Console.ReadLine();
 
             if (nouvelleSaisi == "o" || nouvelleSaisi == "O")
+
+            {
+                Console.WriteLine("\n");
                 return true;
-            else
+            }
+
+            {
                 return false;
+            }
         }
     }
 }
